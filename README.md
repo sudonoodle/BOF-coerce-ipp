@@ -4,6 +4,9 @@ A Beacon Object File (BOF) that forces a Windows machine to authenticate over HT
 
 Tested on **Windows 11 25H2**.
 
+<img width="2076" height="802" alt="img-3" src="https://github.com/user-attachments/assets/4974feec-a093-4ef9-a0f1-2054dbcf1ec6" />
+
+
 ## How It Works
 
 The BOF was produced by tracing `printui.exe` during an IPP printer add, and reducing it to the observed set of API calls (using Claude Opus 5.5, Frida, and ETW). At a high-level, this BOF does the following:
