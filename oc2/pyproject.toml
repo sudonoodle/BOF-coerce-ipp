@@ -1,0 +1,36 @@
+[project]
+name = "oc2-commands-coerce-ipp"
+version = "0.1.0"
+description = "Coerce machine account authentication via AssocIppDirected"
+readme = "../README.md"
+requires-python = "==3.13.11"
+authors = [{ name = "sudonoodle" }]
+dependencies = [
+    "oc2-sdk-python==3.0.0-rc.2",
+    "pydantic>=2.12.5",
+]
+
+[dependency-groups]
+dev = [
+    "mypy==1.20.0",
+    "ruff==0.15.9",
+    "ty==0.0.85",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+ignore = ["E501"]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.uv.sources]
+oc2-sdk-python = { index = "outflank-jfrog-customer" }
+
+[[tool.uv.index]]
+name = "outflank-jfrog-customer"
+url = "https://outflank.jfrog.io/artifactory/api/pypi/pypi-customer/simple"
+explicit = true

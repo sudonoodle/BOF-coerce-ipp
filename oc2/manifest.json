@@ -1,0 +1,51 @@
+{
+  "package_id": "com.sudonoodle.coerce-ipp",
+  "version": "1.0.0",
+  "display_information": {
+    "name": "IPP Coercion BOF",
+    "description": "Coerce machine account authentication via AssocIppDirected"
+  },
+  "_metadata": {
+    "schema_version": "2.0.0",
+    "min_api_version": "3.0.0-rc.2"
+  },
+  "runtime": {
+    "type": "uv-python",
+    "working_dir": "{root_dir}/oc2",
+    "command": [
+      "{python}",
+      "coerce_ipp.py"
+    ],
+    "autostart": true,
+    "autorestart": "unexpected",
+    "startretries": 5,
+    "exitcodes": [
+      0,
+      2
+    ]
+  },
+  "features": {
+    "command_provider": {
+      "permissions": [
+        "artifacts:read",
+        "artifacts:write",
+        "command_executions:write",
+        "command_provider:connect",
+        "commands:sync",
+        "implant_tasks:write"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "name": "coerce_ipp_bof_x64",
+      "path": "{root_dir}/dist/coerce-ipp.x64.o",
+      "type": "bof"
+    },
+    {
+      "name": "coerce_ipp_bof_x86",
+      "path": "{root_dir}/dist/coerce-ipp.x86.o",
+      "type": "bof"
+    }
+  ]
+}
